@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://goktugceyhan.dev
+
+# Sitemaps
+Sitemap: https://goktugceyhan.dev/sitemap.xml
