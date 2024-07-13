@@ -10,7 +10,7 @@ export const CAREERS: CareerProps[] = [
     type: 'Fulltime',
     start_date: '2024.02',
     end_date: null,
-    industry: 'Insurance',
+    industry: 'Insurance Company',
     link: 'https://otoanaliz.net/',
   },
   {
@@ -23,7 +23,7 @@ export const CAREERS: CareerProps[] = [
     start_date: '2023.10',
     end_date: '2024.01',
     industry: 'Software Development',
-    link: null,
+    link: 'https://www.upwork.com/freelancers/~01492a8ec2f20e50d4?mp_source=share',
   },
   {
     position: 'Backend Developer',
