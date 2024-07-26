@@ -37,7 +37,7 @@ const ProjectsDetailPage: NextPage<ProjectsDetailPageProps> = ({ project }) => {
               url: project?.image,
             },
           ],
-          siteName: 'Blog Göktuğ Ceyhan',
+          siteName: 'Project Göktuğ Ceyhan',
         }}
       />
       <Container data-aos='fade-up'>

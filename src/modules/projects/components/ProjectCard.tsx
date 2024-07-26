@@ -35,7 +35,7 @@ const ProjectCard = ({
             alt={title}
             className='rounded-t-xl h-48 object-cover object-left'
           />
-          <div className='flex gap-1 absolute top-0 left-0 w-full h-full bg-black opacity-0 transition-opacity duration-300 flex justify-center items-center text-white group-hover:opacity-80 rounded-t-xl text-sm font-medium'>
+          <div className=' gap-1 absolute top-0 left-0 w-full h-full bg-black opacity-0 transition-opacity duration-300 flex justify-center items-center text-white group-hover:opacity-80 rounded-t-xl text-sm font-medium'>
             <span>View Project</span>
             <ViewIcon size={20} />
           </div>

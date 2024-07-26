@@ -25,6 +25,7 @@ import {
   SiSupabase,
   SiTailwindcss,
   SiTypescript,
+  SiVuedotjs,
   SiWebpack,
 } from 'react-icons/si';
 
@@ -39,6 +40,7 @@ export const STACKS: stacksProps = {
   JavaScript: <SiJavascript size={iconSize} className='text-yellow-400' />,
   TypeScript: <SiTypescript size={iconSize} className='text-blue-400' />,
   'Next.js': <SiNextdotjs size={iconSize} />,
+  'Vue.js': <SiVuedotjs size={iconSize} className='text-green-500' />,
   'React.js': <SiReact size={iconSize} className='text-sky-500' />,
   TailwindCSS: <SiTailwindcss size={iconSize} className='text-cyan-300' />,
   Bootstrap: (

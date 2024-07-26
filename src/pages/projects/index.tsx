@@ -44,7 +44,8 @@ export const getStaticProps: GetStaticProps = async () => {
     .select('*')
     .order('is_featured', { ascending: false })
     .filter('is_show', 'eq', true)
-    .filter('deleted_at', 'is', null);
+    .filter('deleted_at', 'is', null)
+    .order('updated_at', { ascending: false });
 
   return {
     props: {
