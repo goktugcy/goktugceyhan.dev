@@ -1,6 +1,6 @@
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  //swcMinify: true,
   images: {
     domains: [
       'rffureejqjzrbqzrcyxv.supabase.co',
