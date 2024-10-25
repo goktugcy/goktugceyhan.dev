@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 
 import { PAIR_DEVICES } from '@/common/constant/devices';
