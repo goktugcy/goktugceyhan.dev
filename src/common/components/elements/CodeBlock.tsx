@@ -72,7 +72,7 @@ const CodeBlock = ({
             )}
           </button>
 
-          {/* <SyntaxHighlighter
+          <SyntaxHighlighter
             {...props}
             style={themeColor}
             customStyle={{
@@ -86,7 +86,7 @@ const CodeBlock = ({
             wrapLongLines={true}
           >
             {String(children).replace(/\n$/, '')}
-          </SyntaxHighlighter> */}
+          </SyntaxHighlighter>
         </div>
       ) : (
         <code className='font-light bg-neutral-200 text-sky-600 dark:text-sky-300 dark:bg-neutral-700 py-1 px-2 rounded-md text-[14px]'>
