@@ -18,8 +18,10 @@ const PAGE_DESCRIPTION =
 const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
   const [visibleProjects, setVisibleProjects] = useState(6);
 
+  // Guard for null or undefined projects
+  const safeProjects = Array.isArray(projects) ? projects : [];
   const loadMore = () => setVisibleProjects((prev) => prev + 2);
-  const hasMore = visibleProjects < projects.length;
+  const hasMore = visibleProjects < safeProjects.length;
 
   return (
     <>
@@ -27,7 +29,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
       <Container data-aos='fade-up'>
         <PageHeading title={PAGE_TITLE} description={PAGE_DESCRIPTION} />
         <Projects
-          projects={projects.slice(0, visibleProjects)}
+          projects={safeProjects.slice(0, visibleProjects)}
           loadMore={loadMore}
           hasMore={hasMore}
         />
