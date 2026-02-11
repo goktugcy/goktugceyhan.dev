@@ -28,7 +28,7 @@
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.9",
     "aos": "^3.0.0-beta.6",
-    "axios": "^1.12.2",
+    "axios": "^1.13.5",
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
