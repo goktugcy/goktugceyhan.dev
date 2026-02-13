@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   HiCheckCircle as CheckIcon,
   HiOutlineClipboardCopy as CopyIcon,
@@ -27,6 +27,12 @@ SyntaxHighlighter.registerLanguage(languages.typescript, typescript);
 SyntaxHighlighter.registerLanguage(languages.diff, diff);
 SyntaxHighlighter.registerLanguage(languages.tsx, tsx);
 SyntaxHighlighter.registerLanguage(languages.css, css);
+
+// Type-safe wrapper for TypeScript 5.0.4 compatibility
+const HighlighterComponent =
+  SyntaxHighlighter as unknown as React.ComponentType<
+    Record<string, unknown> & { children?: React.ReactNode }
+  >;
 
 const CodeBlock = ({
   className = '',
@@ -72,7 +78,7 @@ const CodeBlock = ({
             )}
           </button>
 
-          <SyntaxHighlighter
+          <HighlighterComponent
             {...props}
             style={themeColor}
             customStyle={{
@@ -86,7 +92,7 @@ const CodeBlock = ({
             wrapLongLines={true}
           >
             {String(children).replace(/\n$/, '')}
-          </SyntaxHighlighter>
+          </HighlighterComponent>
         </div>
       ) : (
         <code className='font-light bg-neutral-200 text-sky-600 dark:text-sky-300 dark:bg-neutral-700 py-1 px-2 rounded-md text-[14px]'>

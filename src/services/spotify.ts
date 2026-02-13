@@ -34,8 +34,7 @@ supabase
   .on(
     'postgres_changes',
     { event: 'UPDATE', schema: 'public', table: 'spotify_token' },
-    (payload) => {
-      console.log('Token updated', payload);
+    () => {
       updateToken();
     }
   )

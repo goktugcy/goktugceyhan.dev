@@ -57,6 +57,9 @@ const CareerCard = ({
               <span>{format(startDate, 'MMM yyyy')}</span> -{' '}
               <span>{end_date ? format(endDate, 'MMM yyyy') : 'Present'}</span>
             </div>
+            {durationText && (
+              <span className='text-xs text-neutral-500'>({durationText})</span>
+            )}
           </div>
         </div>
       </div>

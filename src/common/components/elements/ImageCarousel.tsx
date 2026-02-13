@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Slider from 'react-slick';
 import { useWindowSize } from 'usehooks-ts';
 
@@ -11,6 +11,11 @@ interface ImageCarouselProps {
   images: string[];
   interval?: number;
 }
+
+// Type-safe wrapper for TypeScript 5.0.4 compatibility
+const SliderComponent = Slider as unknown as React.ForwardRefExoticComponent<
+  Record<string, unknown> & React.RefAttributes<Slider>
+>;
 
 const ImageCarousel = ({ images, interval = 3000 }: ImageCarouselProps) => {
   const sliderRef = useRef<Slider>(null);
@@ -79,7 +84,7 @@ const ImageCarousel = ({ images, interval = 3000 }: ImageCarouselProps) => {
   };
 
   return (
-    <Slider ref={sliderRef} {...settings} className='pt-5'>
+    <SliderComponent ref={sliderRef} {...settings} className='pt-5'>
       {images?.map((image, index) => (
         <div key={index}>
           <Image
@@ -92,7 +97,7 @@ const ImageCarousel = ({ images, interval = 3000 }: ImageCarouselProps) => {
           />
         </div>
       ))}
-    </Slider>
+    </SliderComponent>
   );
 };
 
