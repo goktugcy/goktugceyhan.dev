@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import { PAIR_DEVICES } from '@/common/constant/devices';
-import { supabase } from '@/common/libs/supabase';
 import {
   DeviceDataProps,
   DeviceResponseProps,
@@ -12,16 +11,34 @@ import {
 const BASE_URL = 'https://api.spotify.com/v1';
 const AVAILABLE_DEVICES_ENDPOINT = `${BASE_URL}/me/player/devices`;
 const NOW_PLAYING_ENDPOINT = `${BASE_URL}/me/player/currently-playing`;
+const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
+
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+
+const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 
 const getAccessToken = async () => {
-  const { data } = await supabase
-    .from('spotify_token')
-    .select('token')
-    .order('created_at', { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  try {
+    const response = await axios.post(
+      TOKEN_ENDPOINT,
+      new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: refresh_token || '',
+      }).toString(),
+      {
+        headers: {
+          Authorization: `Basic ${basic}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
 
-  return data?.token || '';
+    return response.data.access_token;
+  } catch (error) {
+    return null;
+  }
 };
 
 export const getAvailableDevices = async (): Promise<DeviceResponseProps> => {
