@@ -13,38 +13,23 @@ const BASE_URL = 'https://api.spotify.com/v1';
 const AVAILABLE_DEVICES_ENDPOINT = `${BASE_URL}/me/player/devices`;
 const NOW_PLAYING_ENDPOINT = `${BASE_URL}/me/player/currently-playing`;
 
-let currentToken = '';
-
-const updateToken = async () => {
+const getAccessToken = async () => {
   const { data } = await supabase
     .from('spotify_token')
     .select('token')
     .order('created_at', { ascending: false })
-    .limit(1);
+    .limit(1)
+    .maybeSingle();
 
-  currentToken = data?.[0]?.token || '';
+  return data?.token || '';
 };
-
-// Initialize token on startup
-updateToken();
-
-// Subscribe to real-time updates
-supabase
-  .channel('custom-update-channel')
-  .on(
-    'postgres_changes',
-    { event: 'UPDATE', schema: 'public', table: 'spotify_token' },
-    () => {
-      updateToken();
-    }
-  )
-  .subscribe();
 
 export const getAvailableDevices = async (): Promise<DeviceResponseProps> => {
   try {
+    const token = await getAccessToken();
     const response = await axios.get(AVAILABLE_DEVICES_ENDPOINT, {
       headers: {
-        Authorization: `Bearer ${currentToken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -75,9 +60,11 @@ export const getAvailableDevices = async (): Promise<DeviceResponseProps> => {
 
 export const getNowPlaying = async (): Promise<NowPlayingResponseProps> => {
   try {
+    const token = await getAccessToken();
+
     const response = await axios.get(NOW_PLAYING_ENDPOINT, {
       headers: {
-        Authorization: `Bearer ${currentToken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
