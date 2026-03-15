@@ -41,17 +41,58 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
 export default ProjectsPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await supabase
-    .from('projects')
-    .select('*')
-    .order('is_featured', { ascending: false })
-    .filter('is_show', 'eq', true)
-    .filter('deleted_at', 'is', null)
-    .order('updated_at', { ascending: false });
+  let projects: ProjectItemProps[] = [];
+
+  try {
+    const response = await supabase
+      .from('projects')
+      .select('*')
+      .order('is_featured', { ascending: false })
+      .filter('is_show', 'eq', true)
+      .filter('deleted_at', 'is', null)
+      .order('updated_at', { ascending: false });
+
+    if (response.error || !response.data) {
+      throw new Error(response.error?.message || 'Supabase error');
+    }
+
+    projects = response.data;
+  } catch (error) {
+    if (process.env.NEON_DATABASE_URL) {
+      try {
+        const { Pool } = await import('pg');
+        const pool = new Pool({
+          connectionString: process.env.NEON_DATABASE_URL,
+          ssl: true,
+        });
+        const client = await pool.connect();
+        try {
+          const result = await client.query(
+            `SELECT * FROM projects 
+             WHERE is_show = true AND deleted_at IS NULL 
+             ORDER BY is_featured DESC, updated_at DESC`
+          );
+          projects = result.rows.map((row) => ({
+            ...row,
+            stacks:
+              typeof row.stacks === 'object'
+                ? JSON.stringify(row.stacks)
+                : row.stacks,
+          })) as ProjectItemProps[];
+        } finally {
+          client.release();
+          await pool.end();
+        }
+      } catch (neonError) {
+        // eslint-disable-next-line no-console
+        console.error('NeonDB error:', neonError);
+      }
+    }
+  }
 
   return {
     props: {
-      projects: response.data ? JSON.parse(JSON.stringify(response.data)) : [],
+      projects: JSON.parse(JSON.stringify(projects)),
     },
     revalidate: 1,
   };
