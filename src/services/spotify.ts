@@ -13,19 +13,24 @@ const AVAILABLE_DEVICES_ENDPOINT = `${BASE_URL}/me/player/devices`;
 const NOW_PLAYING_ENDPOINT = `${BASE_URL}/me/player/currently-playing`;
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
-
-const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
-
 const getAccessToken = async () => {
+  const client_id = process.env.SPOTIFY_CLIENT_ID;
+  const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+  const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+
+  if (!client_id || !client_secret || !refresh_token) {
+    console.error('Missing Spotify environment variables');
+    return null;
+  }
+
+  const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
+
   try {
     const response = await axios.post(
       TOKEN_ENDPOINT,
       new URLSearchParams({
         grant_type: 'refresh_token',
-        refresh_token: refresh_token || '',
+        refresh_token,
       }).toString(),
       {
         headers: {
@@ -37,6 +42,14 @@ const getAccessToken = async () => {
 
     return response.data.access_token;
   } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(
+        'Spotify Access Token Error:',
+        error.response?.data || error.message
+      );
+    } else {
+      console.error('Spotify Access Token Error:', error);
+    }
     return null;
   }
 };
