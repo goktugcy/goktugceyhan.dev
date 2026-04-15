@@ -17,12 +17,13 @@ const Introduction = () => {
       </div>
 
       <p className='leading-[1.8] md:leading-loose mt-6 text-neutral-800 dark:text-neutral-300'>
-        Hello, I have been working as a freelancer in software development for 4
-        years and have 3 years of professional experience. I develop backend
-        applications using technologies such as PHP & Laravel, TypeScript,
-        NodeJS, Express, NestJS, Adonis, Cloudflare worker services, and HonoJS.
-        On the frontend side, I am improving myself in ReactJS and NextJS along
-        with Bootstrap and CSS.
+        I am a backend-focused software developer with over 5 years of
+        experience in the software industry. I build scalable APIs, services,
+        and product-driven solutions using Node.js, TypeScript, PHP/Laravel, and
+        modern web technologies. My experience includes database management,
+        caching systems, serverless architectures, and developer-focused
+        infrastructure, and I continuously strengthen my technical expertise
+        through real-world projects and product initiatives.
       </p>
     </section>
   );
