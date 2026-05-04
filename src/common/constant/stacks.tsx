@@ -21,6 +21,7 @@ import {
   SiPhp,
   SiPostgresql,
   SiReact,
+  SiRedis,
   SiSocketdotio,
   SiStyledcomponents,
   SiSupabase,
@@ -55,6 +56,7 @@ export const STACKS: stacksProps = {
   MySQL: <SiMysql size={iconSize} className='text-blue-500' />,
   PostgreSQL: <SiPostgresql size={iconSize} className='text-blue-500' />,
   MongoDB: <SiMongodb size={iconSize} className='text-green-500' />,
+  Redis: <SiRedis size={iconSize} className='text-red-500' />,
   'Artificial Intelligence': (
     <BsRobot size={iconSize} className='text-rose-500' />
   ),
