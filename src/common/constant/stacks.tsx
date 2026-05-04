@@ -5,6 +5,7 @@ import {
   SiCloudflarepages,
   SiCss3,
   SiExpress,
+  SiGo,
   SiGraphql,
   SiJavascript,
   SiJquery,
@@ -39,6 +40,7 @@ export const STACKS: stacksProps = {
   PHP: <SiPhp size={iconSize} className='text-blue-500' />,
   JavaScript: <SiJavascript size={iconSize} className='text-yellow-400' />,
   TypeScript: <SiTypescript size={iconSize} className='text-blue-400' />,
+  Go: <SiGo size={iconSize} className='text-cyan-400' />,
   'Next.js': <SiNextdotjs size={iconSize} />,
   'Vue.js': <SiVuedotjs size={iconSize} className='text-green-500' />,
   'React.js': <SiReact size={iconSize} className='text-sky-500' />,
@@ -57,6 +59,7 @@ export const STACKS: stacksProps = {
     <BsRobot size={iconSize} className='text-rose-500' />
   ),
   OpenAI: <SiOpenai size={iconSize} className='text-green-500' />,
+  Openclaw: <BsRobot size={iconSize} />,
   'Node.js': <SiNodedotjs size={iconSize} className='text-green-600' />,
   Cloudflare: <SiCloudflare size={iconSize} className='text-blue-500' />,
   'Cloudflare Pages': (
